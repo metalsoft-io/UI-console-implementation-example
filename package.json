@@ -1,0 +1,12 @@
+{
+  "name": "console-implementation-example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build:ui": "cd console-implementation-example-ui && npm run build",
+    "build:backend": "cd console-implementation-example-backend && npm run build"
+  },
+  "author": "",
+  "license": "ISC"
+}

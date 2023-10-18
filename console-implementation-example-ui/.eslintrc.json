@@ -1,0 +1,8 @@
+{
+    "globals": {
+      "BlobBuilder": "readonly",
+      "WebKitBlobBuilder": "readonly",
+      "MozBlobBuilder": "readonly"
+    }
+  }
+  

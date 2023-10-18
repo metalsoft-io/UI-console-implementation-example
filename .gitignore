@@ -1,0 +1,62 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+console-implementation-example-ui/node_modules
+console-implementation-example-ui/.pnp
+console-implementation-example-ui/.pnp.js
+
+# testing
+console-implementation-example-ui/coverage
+
+# production
+console-implementation-example-ui/build
+
+# misc
+console-implementation-example-ui/.DS_Store
+console-implementation-example-ui/.env.local
+console-implementation-example-ui/.env
+console-implementation-example-ui/.env.development.local
+console-implementation-example-ui/.env.test.local
+console-implementation-example-ui/.env.production.local
+
+console-implementation-example-ui/npm-debug.log*
+console-implementation-example-ui/yarn-debug.log*
+console-implementation-example-ui/yarn-error.log*
+
+# compiled output
+console-implementation-example-backend/dist
+console-implementation-example-backend/node_modules
+
+# Logs
+console-implementation-example-backend/logs
+console-implementation-example-backend/*.log
+console-implementation-example-backend/npm-debug.log*
+console-implementation-example-backend/pnpm-debug.log*
+console-implementation-example-backend/yarn-debug.log*
+console-implementation-example-backend/yarn-error.log*
+console-implementation-example-backend/lerna-debug.log*
+
+# OS
+console-implementation-example-backend/.DS_Store
+
+# Tests
+console-implementation-example-backend/coverage
+console-implementation-example-backend/.nyc_output
+
+# IDEs and editors
+console-implementation-example-backend/.idea
+console-implementation-example-backend/.project
+console-implementation-example-backend/.classpath
+console-implementation-example-backend/.c9/
+console-implementation-example-backend/*.launch
+console-implementation-example-backend/.settings/
+console-implementation-example-backend/*.sublime-workspace
+
+# IDE - VSCode
+console-implementation-example-backend/.vscode/*
+console-implementation-example-backend/!.vscode/settings.json
+console-implementation-example-backend/!.vscode/tasks.json
+console-implementation-example-backend/!.vscode/launch.json
+console-implementation-example-backend/!.vscode/extensions.json
+
+console-implementation-example-backend/.env
