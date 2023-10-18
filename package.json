@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build:ui": "cd console-implementation-example-ui && npm run build",
-    "build:backend": "cd console-implementation-example-backend && npm run build"
+    "build:backend": "cd console-implementation-example-backend && npm run build",
+    "build": "npm run build:ui && npm run build:backend"
   },
   "author": "",
   "license": "ISC"
