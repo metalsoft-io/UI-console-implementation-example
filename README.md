@@ -15,7 +15,7 @@ The repository consists of two projects: console-implementation-example-ui and c
 4. [Git](https://git-scm.com/) installed on the local machine.
 
 # How to use
-1. Clone the project to your local machine.
+1. Clone the [project](https://github.com/metalsoft-io/UI-console-implementation-example/tree/main) to your local machine.
 2. Create `.env` files in both `console-implementation-example-ui` and `console-implementation-example-backend` directories.
 3. Copy and paste the content from `.env.example` into the appropriate `.env` files.
 
@@ -80,25 +80,27 @@ scp -r ./dist ./.env ./package.json <user>@<proxy_server_IP>:/usr/share/nginx/se
 
 Here, `<user>` is the username on the proxy server, and `<proxy_server_IP>` is the IP address of the proxy server.
 
-9. Go to the proxy server. To `/usr/share/nginx/server` folder. Run:
+9. Navigate to the `/usr/share/nginx/server` folder on your proxy server.
+
+Execute the following command to install the necessary packages:
 
 ```
 npm install
 ```
 
-From the same folder run:
+Start the server by running the following command from the same folder:
 
 ```
 pm2 start dist/main.js
 ```
 
-To check that the server has launched run the command:
+To verify that the server has started, execute the following command:
 
 ```
 pm2 ls
 ```
 
-The result should look similar to this
+The output should resemble the following:
 
 ```
 ┌────┬─────────┬─────────────┬─────────┬─────────┬──────────┬────────┬──────┬───────────┬──────────┬──────────┬──────────┬──────────┐
