@@ -1,130 +1,49 @@
 # UI-console-implementation-example
 
-This repository contains projects designed to facilitate the integration of a VNC console connected to Metalsoft into any user interface.
+This repository serves as an end-to-end example for integrating a Virtual Network Computing (VNC) console into any user interface, leveraging Metalsoft's Guacamole Server. It's structured into two core components:
 
-The repository consists of two projects: console-implementation-example-ui and console-implementation-example-backend.
+1. **Frontend** (`console-implementation-example-ui`): A React.js-based demonstration UI designed to assist with the integration of the Guacamole client. This UI initiates a connection to the Metalsoft's Guacamole server via a proxy, enabling VNC functionalities in your application.
 
-- **console-implementation-example-ui**: This is a React.js-based user interface designed to demonstrate the functionalities of a VNC (Virtual Network Computing) console. The project incorporates a Guacamole client, which is responsible for initiating a connection to Metalsoft's Guacamole server. Once this connection is established, the Guacamole server then takes over the role of connecting to a specific Metalsoft server via the VNC console. The primary goal of this project is to serve as a reusable example that can easily be integrated into various user interfaces.
-- **console-implementation-example-backend**: This is a NestJS server that enables the retrieval of cookies required by the Guacamole client to establish a connection.
+2. **Backend** (`console-implementation-example-backend`): A NestJS-based server responsible for retrieving the cookies required for the Guacamole client to establish a secure connection. This is critical for the successful operation of the proxy and ultimately the VNC console.
 
-## Requirenments
+Both of these components interact through an NGINX proxy server that serves three primary roles:
 
-1. A configured NGINX proxy server.
-2. [PM2](https://pm2.keymetrics.io/docs/usage/quick-start/) installed on the proxy server.
-3. [Node.js](https://nodejs.org/en) and [npm](https://www.npmjs.com/) installed locally and on the proxy server.
-4. [Git](https://git-scm.com/) installed on the local machine.
+- Acts as a reverse proxy to Metalsoft's private Guacamole server, making it accessible.
+- Hosts the `console-implementation-example-ui` for demonstration or testing purposes.
+- Routes requests to the `console-implementation-example-backend`, facilitating cookie retrieval.
 
-## How to use
+## Key Requirements:
 
-1. Clone the [project](https://github.com/metalsoft-io/UI-console-implementation-example/tree/main) to your local machine.
-2. Create `.env` files in both `console-implementation-example-ui` and `console-implementation-example-backend` directories.
-3. Copy and paste the content from `.env.example` into the appropriate `.env` files.
+- Both the backend and the proxy must be under the same domain to successfully retrieve cookies.
 
-**`console-implementation-example-ui` `.env`**
+- NGINX server must be configured to route requests appropriately among the `console-implementation-example-ui`, `console-implementation-example-backend`, and Metalsoft's Guacamole Server.
 
-- REACT_APP_BACKEND_URL=https://guacamole-test.metalsoft.dev
+The ultimate goal of this repository is to provide a comprehensive example that can be adapted and integrated into different user interfaces with minimal effort.
 
-For **REACT_APP_BACKEND_URL**, provide the URL of the proxy server.
+## Prerequisites
 
-**`console-implementation-example-backend` `.env`**
+### Local Development Environment
 
-Configure the following variables:
+1. [Git](https://git-scm.com/): Required for cloning the repository and version control.
+2. [Node.js](https://nodejs.org/en) and [npm](https://www.npmjs.com/): Needed for running the example projects. Make sure you have a compatible version installed.
+3. [npm](https://www.npmjs.com/): Node.js package manager for installing dependencies.
+4. SCP Tool: Required for securely transferring the built project files to the proxy server. Typically comes pre-installed on Unix-based systems.
 
-- FRONTEND_ORIGIN=https://guacamole-app.metalsoft.dev
+### Server Requirements
 
-For the **FRONTEND_ORIGIN** environment variable, specify the URL where the example project, named `console-implementation-example-ui`, will be deployed.
+1. Configured NGINX Proxy Server: An NGINX server must be set up to act as a reverse proxy for routing requests among the UI, backend, and the Metalsoft Guacamole Server.
+2. [PM2](https://pm2.keymetrics.io/docs/usage/quick-start/): A process manager for Node.js, needed for managing your backend service.
+3. [Node.js](https://nodejs.org/en) and [npm](https://www.npmjs.com/): Required for running the backend service.
 
-- COOKIE_DOMAIN=guacamole-test.metalsoft.dev
+# NGINX Configuration Guide
 
-For **COOKIE_DOMAIN**, provide the domain name of the proxy server.
+This guide is intended to provide detailed instructions for configuring your NGINX server to act as a vital intermediary between your application's frontend, backend, and Metalsoft's Guacamole Server. The configuration facilitates the following:
 
-4. Go to **console-implementation-example-ui**, run
+1. **Frontend (`<ui_domain>` or `console-implementation-example-ui`)**: This is the user interface developed with React.js that enables VNC functionalities via Metalsoft's Guacamole Server. It receives incoming web requests and routes them to the appropriate server location.
 
-```
-npm install
-```
+2. **Backend (`<proxy_domain>` or `console-implementation-example-backend`)**: This is the NestJS-based server that retrieves necessary cookies for secure connection establishment. The proxy server routes requests to this backend to facilitate cookie retrieval.
 
-5. Go to **console-implementation-example-backend**, run
-
-```
-npm install
-```
-
-6. Run 
-
-```
-npm run build
-```
-
-from the `UI-console-implementation-example` folder. This command will create builds for both the UI and the backend.
-
-7. On the server where the proxy is located and where NGINX is configured, create two directories if they do not already exist:
-
-```
-mkdir /usr/share/nginx/html
-mkdir /usr/share/nginx/server
-```
-
-8. Use `scp` or a similar tool to transfer all built folders to your proxy server.
-
-- **console-implementation-example-ui**
-
-To copy the contents of the **console-implementation-example-ui** build folder to the proxy server, run the following command from the `console-implementation-example-ui` directory:
-
-```
-scp -r ./build/* <user>@<proxy_server_IP>:/usr/share/nginx/html
-```
-
-Here, `<user>` is the username on the proxy server, and `<proxy_server_IP>` is the IP address of the proxy server.
-
-- **console-implementation-example-backend**
-
-To copy the dist folder, `.env` file, and package.json from the **console-implementation-example-backend** project to the proxy server, run the following command from the `console-implementation-example-backend` directory:
-
-```
-scp -r ./dist ./.env ./package.json <user>@<proxy_server_IP>:/usr/share/nginx/server
-```
-
-Here, `<user>` is the username on the proxy server, and `<proxy_server_IP>` is the IP address of the proxy server.
-
-9. Navigate to the `/usr/share/nginx/server` folder on your proxy server.
-
-Execute the following command to install the necessary packages:
-
-```
-npm install
-```
-
-Start the server by running the following command from the same folder:
-
-```
-pm2 start dist/main.js
-```
-
-To verify that the server has started, execute the following command:
-
-```
-pm2 ls
-```
-
-The output should resemble the following:
-
-```
-┌────┬─────────┬─────────────┬─────────┬─────────┬──────────┬────────┬──────┬───────────┬──────────┬──────────┬──────────┬──────────┐
-│ id │ name    │ namespace   │ version │ mode    │ pid      │ uptime │ ↺    │ status    │ cpu      │ mem      │ user     │ watching │
-├────┼─────────┼─────────────┼─────────┼─────────┼──────────┼────────┼──────┼───────────┼──────────┼──────────┼──────────┼──────────┤
-│ 0  │ main    │ default     │ 0.0.1   │ fork    │ 55734    │ 4h     │ 0    │ online    │ 0%       │ 72.2mb   │ root     │ disabled │
-└────┴─────────┴─────────────┴─────────┴─────────┴──────────┴────────┴──────┴───────────┴──────────┴──────────┴──────────┴──────────┘
-```
-
-10. At this point, you should be able to access the `console-implementation-example-ui` project by navigating to the URL specified in the **FRONTEND_ORIGIN** environment variable, which in this case is https://guacamole-app.metalsoft.dev.
-11. Once the example project has loaded in your browser, log in to your Metalsoft account.
-12. Supply server-related information such as the `server ID`, `server instance ID`, and `datacenter name`. In this demonstration, these details are entered manually, but you are welcome to obtain them programmatically through any method you're familiar with.
-13. If no errors occur, the VNC console should become visible shortly.
-
-# NGINX Configuration
-
-This document provides guidance for configuring the NGINX server for `<ui_domain>` and `<proxy_domain>`.
+3. **`Metalsoft's Guacamole Server`**: The NGINX server acts as a reverse proxy to this server, making VNC functionalities accessible.
 
 ## Prerequisites
 
@@ -321,5 +240,122 @@ server {
         add_header 'Access-Control-Allow-Headers' 'Authorization, Content-Type, a-metalsoft-datacenter, Guacamole-Status-Code, Guacamole-Tunnel-Token' always;
         add_header 'Access-Control-Expose-Headers' 'Guacamole-Tunnel-Token, Guacamole-Status-Code, Guacamole-Error-Message' always;
     }
+
+#    error_page   500 502 503 504  /50x.html;
+#    location = /50x.html {
+#        root   /usr/share/nginx/html;
+#    }
+
 }
 ```
+
+**Note:** The server setup is only part of the configuration. To ensure that everything functions as expected, please follow the steps in the **How to Use** section.
+
+## How to Use
+
+### Setup on Local Machine
+
+1. Clone the Project:
+
+```
+git clone https://github.com/metalsoft-io/UI-console-implementation-example.git
+```
+
+2. Set up Environment Files:
+
+- Navigate to both `console-implementation-example-ui` and `console-implementation-example-backend` directories.
+- Create `.env` files in each and populate them with values from the respective `.env.example` files.
+
+Configuration Details:
+
+**For console-implementation-example-ui**
+
+Create an `.env` file and set the following variable:
+
+- **REACT_APP_BACKEND_URL**: This is the URL of the proxy server that facilitates the connection to Metalsoft's Guacamole Server.
+
+**Example**: REACT_APP_BACKEND_URL=https://<proxy_domain>
+
+**For console-implementation-example-backend**
+
+Create an `.env` file and set the following variables:
+
+- **FRONTEND_ORIGIN**: This is the URL where your frontend (`console-implementation-example-ui`) will be deployed.
+
+**Example**: FRONTEND_ORIGIN=https://<ui_domain>
+- **COOKIE_DOMAIN**: This is the domain name of the proxy server, which should be the same as the domain you've configured for backend.
+
+**Example**: COOKIE_DOMAIN=<proxy_domain>
+
+**Note**: The placeholders <proxy_domain> and <ui_domain> are meant to be replaced with your specific domain information. These placeholders correspond to the configurations in the NGINX server for proxy and UI, respectively. Ensure that both the backend and the proxy share the same domain (<proxy_domain>) to successfully retrieve cookies. The values mentioned are for demonstration purposes and should be adjusted to fit your specific setup requirements.
+
+3. Install Dependencies:
+
+```
+cd console-implementation-example-ui && npm install
+cd console-implementation-example-backend && npm install
+```
+
+4. Build the Projects:
+
+```
+npm run build
+```
+This will create build folders for both UI and backend.
+
+### Transfer Builds to Proxy Server
+
+1. Transfer Files:
+Use SCP or your preferred tool to transfer the built folders to your proxy server.
+
+```
+# Transfer UI build
+scp -r console-implementation-example-ui/build/* <user>@<proxy_server_IP>:/usr/share/nginx/html
+
+# Transfer backend build
+scp -r console-implementation-example-backend/dist .env package.json <user>@<proxy_server_IP>:/usr/share/nginx/server
+```
+
+### Setup on Proxy Server
+
+1. SSH into Proxy Server:
+
+```
+ssh <user>@<proxy_server_IP>
+```
+
+2. Install Backend Dependencies:
+
+```
+cd /usr/share/nginx/server && npm install
+```
+
+3. Start Backend Server:
+
+```
+pm2 start dist/main.js
+```
+
+4. Verify Server Status:
+
+```
+pm2 ls
+```
+
+5. Testing the UI:
+
+Open your web browser and go to the URL specified in your `FRONTEND_ORIGIN` environment variable (e.g., https://<ui_domain>).
+
+### Post-Setup Steps
+
+1. Login:
+
+Once the UI has loaded, log in to your Metalsoft account.
+
+2. Server Information:
+
+Provide server-related information (e.g., `server ID`, `server instance ID`, `datacenter name`). You can either manually enter these details or retrieve them programmatically.
+
+3. VNC Console:
+
+If all steps are followed correctly and no errors occur, the VNC console should now be visible and functional.
