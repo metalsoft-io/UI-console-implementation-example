@@ -1,6 +1,6 @@
 # UI-console-implementation-example
 
-This repository serves as an end-to-end example for integrating a Virtual Network Computing (VNC) console into any user interface, leveraging Metalsoft's Guacamole Server. It's structured into two core components:
+This repository serves as an example for integrating a Virtual Network Computing (VNC) console into any user interface, leveraging Metalsoft's Guacamole Server. It's structured into two core components:
 
 1. **Frontend** (`console-implementation-example-ui`): A React.js-based demonstration UI designed to assist with the integration of the Guacamole client. This UI initiates a connection to the Metalsoft's Guacamole server via a proxy, enabling VNC functionalities in your application.
 
