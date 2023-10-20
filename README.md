@@ -315,6 +315,8 @@ scp -r console-implementation-example-ui/build/* <user>@<proxy_server_IP>:/usr/s
 scp -r console-implementation-example-backend/dist console-implementation-example-backend/.env console-implementation-example-backend/package.json <user>@<proxy_server_IP>:/usr/share/nginx/server
 ```
 
+**Important Note for UI Server Block**: Ensure that the path specified for transferring the UI build files to the proxy server aligns with your NGINX configuration file. Specifically, if you are transferring UI build files to `/usr/share/nginx/html`, then the `<path_to_root>` value in your NGINX config file's UI Server Block should also be set to `/usr/share/nginx/html`.
+
 ### Setup on Proxy Server
 
 1. SSH into Proxy Server:
