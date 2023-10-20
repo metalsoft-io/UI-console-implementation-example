@@ -80,8 +80,10 @@ server {
 ### Proxy Server Block
 
 ```
+# Upstream block for load balancing
 upstream <upstream_name> {
-  server <backend_ip:backend_port>;
+  # Replace <Metalsoft_Controller_IP> with the actual IP address of the Metalsoft Controller
+  server <Metalsoft_Controller_IP>:<backend_port>;
 }
 
 # Server block
@@ -132,6 +134,8 @@ server {
 }
 ```
 
+**Note**: In the upstream block, replace `<Metalsoft_Controller_IP>` with the IP address that the Metalsoft Controller UI responds to, for example, if `us01.metalsoft.io` responds to `176.223.248.19`, then use `176.223.248.19` as `<Metalsoft_Controller_IP>`.
+
 ## Steps to Apply Configuration
 
 1. Open the NGINX configuration file:
@@ -142,7 +146,7 @@ sudo nano /etc/nginx/conf.d/default.conf
 
 2. Copy and paste the generic configuration structure into the file.
 
-3. Replace **`<upstream_name>`**, **`<backend_ip:backend_port>`**, **`<ui_domain>`**, **`<proxy_domain>`**, **`<path_to_ssl_cert>`**, **`<path_to_ssl_key>`**, **`<path_to_dhparam>`**, **`<path_to_access_log>`**, **`<path_to_error_log>`**, **`<path_to_root>`**, **`<default_indexes>`** and other placeholders with your specific implementation details.
+3. Replace **`<upstream_name>`**, **`<Metalsoft_Controller_IP>:<backend_port>`**, **`<ui_domain>`**, **`<proxy_domain>`**, **`<path_to_ssl_cert>`**, **`<path_to_ssl_key>`**, **`<path_to_dhparam>`**, **`<path_to_access_log>`**, **`<path_to_error_log>`**, **`<path_to_root>`**, **`<default_indexes>`** and other placeholders with your specific implementation details.
 
 4. Save and close the file.
 
