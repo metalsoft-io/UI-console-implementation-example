@@ -304,7 +304,7 @@ This will create build folders for both UI and backend.
 
 ### Transfer Builds to Proxy Server
 
-1. Transfer Files:
+Transfer Files:
 Use SCP or your preferred tool to transfer the built folders to your proxy server.
 
 ```
@@ -316,6 +316,8 @@ scp -r console-implementation-example-backend/dist console-implementation-exampl
 ```
 
 **Important Note for UI Server Block**: Ensure that the path specified for transferring the UI build files to the proxy server aligns with your NGINX configuration file. Specifically, if you are transferring UI build files to `/usr/share/nginx/html`, then the `<path_to_root>` value in your NGINX config file's UI Server Block should also be set to `/usr/share/nginx/html`.
+
+**Folder Existence**: Before transferring the build files, make sure that the folders `/usr/share/nginx/html` and `/usr/share/nginx/server` exist on your proxy server. If they don't, you'll need to create them.
 
 ### Setup on Proxy Server
 
