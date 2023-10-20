@@ -80,7 +80,6 @@ server {
 ### Proxy Server Block
 
 ```
-# Upstream block for load balancing
 upstream <upstream_name> {
   server <backend_ip:backend_port>;
 }
@@ -239,12 +238,6 @@ server {
         add_header 'Access-Control-Allow-Headers' 'Authorization, Content-Type, a-metalsoft-datacenter, Guacamole-Status-Code, Guacamole-Tunnel-Token' always;
         add_header 'Access-Control-Expose-Headers' 'Guacamole-Tunnel-Token, Guacamole-Status-Code, Guacamole-Error-Message' always;
     }
-
-#    error_page   500 502 503 504  /50x.html;
-#    location = /50x.html {
-#        root   /usr/share/nginx/html;
-#    }
-
 }
 ```
 
