@@ -273,7 +273,7 @@ Create an `.env` file and set the following variable:
 
 - **REACT_APP_BACKEND_URL**: This is the URL of the proxy server that facilitates the connection to Metalsoft's Guacamole Server.
 
-**Example**: REACT_APP_BACKEND_URL=https://<proxy_domain>
+**Example**: REACT_APP_BACKEND_URL=https://<proxy_domain> (E.g https://guacamole-test.metalsoft.dev)
 
 **For console-implementation-example-backend**
 
@@ -281,10 +281,10 @@ Create an `.env` file and set the following variables:
 
 - **FRONTEND_ORIGIN**: This is the URL where your frontend (`console-implementation-example-ui`) will be deployed.
 
-**Example**: FRONTEND_ORIGIN=https://<ui_domain>
+**Example**: FRONTEND_ORIGIN=https://<ui_domain> (E.g https://guacamole-app.metalsoft.dev)
 - **COOKIE_DOMAIN**: This is the domain name of the proxy server, which should be the same as the domain you've configured for backend.
 
-**Example**: COOKIE_DOMAIN=<proxy_domain>
+**Example**: COOKIE_DOMAIN=<proxy_domain> (E.g guacamole-test.metalsoft.dev)
 
 **Note**: The placeholders <proxy_domain> and <ui_domain> are meant to be replaced with your specific domain information. These placeholders correspond to the configurations in the NGINX server for proxy and UI, respectively. Ensure that both the backend and the proxy share the same domain (<proxy_domain>) to successfully retrieve cookies. The values mentioned are for demonstration purposes and should be adjusted to fit your specific setup requirements.
 
