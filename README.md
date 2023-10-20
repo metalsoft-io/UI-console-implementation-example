@@ -312,7 +312,7 @@ Use SCP or your preferred tool to transfer the built folders to your proxy serve
 scp -r console-implementation-example-ui/build/* <user>@<proxy_server_IP>:/usr/share/nginx/html
 
 # Transfer backend build
-scp -r console-implementation-example-backend/dist .env package.json <user>@<proxy_server_IP>:/usr/share/nginx/server
+scp -r console-implementation-example-backend/dist console-implementation-example-backend/.env console-implementation-example-backend/package.json <user>@<proxy_server_IP>:/usr/share/nginx/server
 ```
 
 ### Setup on Proxy Server
