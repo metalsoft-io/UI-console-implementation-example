@@ -23,7 +23,7 @@ export class AppService {
   async authUser(userCreds: UserCredsDto): Promise<AuthResponse> {
     try {
       const userResponse = await axios.post(
-        'https://eveng-qa03.metalcloud.io/api?HTTPAuth=false',
+        `${process.env.CONTROLLER_URL}/api?HTTPAuth=false`,
         {
           id: 1,
           jsonrpc: '2.0',

@@ -283,6 +283,10 @@ Create an `.env` file and set the following variables:
 
 **Example**: COOKIE_DOMAIN=<proxy_domain> (E.g guacamole-test.metalsoft.dev)
 
+- **CONTROLLER_URL**: This is the URL for MetalSoft's controller that your application interfaces with.
+
+**Example**: CONTROLLER_URL=https://eveng-qa03.metalcloud.io
+
 **Note**: The placeholders <proxy_domain> and <ui_domain> are meant to be replaced with your specific domain information. These placeholders correspond to the configurations in the NGINX server for proxy and UI, respectively. Ensure that both the backend and the proxy share the same domain (<proxy_domain>) to successfully retrieve cookies. The values mentioned are for demonstration purposes and should be adjusted to fit your specific setup requirements.
 
 3. Install Dependencies:
