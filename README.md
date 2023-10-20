@@ -25,9 +25,8 @@ The ultimate goal of this repository is to provide a comprehensive example that 
 ### Local Development Environment
 
 1. [Git](https://git-scm.com/): Required for cloning the repository and version control.
-2. [Node.js](https://nodejs.org/en) and [npm](https://www.npmjs.com/): Needed for installing dependencies.
-3. [npm](https://www.npmjs.com/): Node.js package manager for installing dependencies.
-4. SCP Tool: Required for securely transferring the built project files to the proxy server. Typically comes pre-installed on Unix-based systems.
+2. [Node.js](https://nodejs.org/en) and [npm](https://www.npmjs.com/): Node.js package manager for installing dependencies.
+3. SCP Tool: Required for securely transferring the built project files to the proxy server. Typically comes pre-installed on Unix-based systems.
 
 ### Server Requirements
 
