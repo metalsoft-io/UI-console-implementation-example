@@ -78,7 +78,7 @@ function App() {
       {user && !serverData &&  <form onSubmit={onSubmitServerData}>
         <label id='instance_id'>
           Server Instance ID:
-          <input ref={serverInstanceIdInputRef} type="text" name="instance_id" defaultValue={11824} />
+          <input ref={serverInstanceIdInputRef} type="text" name="instance_id" defaultValue={13340} />
         </label>
         <label id='server_id'>
           Server IP:

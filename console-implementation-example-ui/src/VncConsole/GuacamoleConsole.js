@@ -308,13 +308,11 @@ export default function GuacamoleConsole({ serverData, userData }) {
 
 	return (
 		<div ref={wrapperRef}
-			// css={{ width: "100%" }}
 			style={{
 				width: "100%",
 			}}
 		>
 			<button
-				// css={{ position: "absolute", visibility: "hidden" }}
 				style={{
 					position: "absolute",
 					visibility: "hidden",
@@ -322,17 +320,16 @@ export default function GuacamoleConsole({ serverData, userData }) {
 				ref={nonvisibleButtonRef}
 			/>
 			<div
-				// css={{ padding: "0rem 2rem", background: "#1E1E1E" }}
 				style={{
 					padding: "0rem 2rem",
 					background: "#1E1E1E",
 				}}
 			>
 				{errorGuacamoleTunnel || errorGuacamoleClient || presetConfigConsolError}
+				{(errorGuacamoleTunnel || errorGuacamoleClient || presetConfigConsolError) && <button onClick={() => setGuacClientObj(null)} disabled={isLoading}>Retry</button>}
 				{isLoading && <div>Loading...</div>}
 			</div>
 			<div
-				// css={{ position: "relative", zIndex: 1, background: "black" }}
 				style={{
 					position: "relative",
 					zIndex: 1,
