@@ -323,10 +323,11 @@ export default function GuacamoleConsole({ serverData, userData }) {
 				style={{
 					padding: "0rem 2rem",
 					background: "#1E1E1E",
+					color: "white",
 				}}
 			>
 				{errorGuacamoleTunnel || errorGuacamoleClient || presetConfigConsolError}
-				{(errorGuacamoleTunnel || errorGuacamoleClient || presetConfigConsolError) && <button onClick={() => setGuacClientObj(null)} disabled={isLoading}>Retry</button>}
+				{(errorGuacamoleTunnel || errorGuacamoleClient || presetConfigConsolError) && <button style={{ marginLeft: "1rem" }} onClick={() => setGuacClientObj(null)} disabled={isLoading}>Retry</button>}
 				{isLoading && <div>Loading...</div>}
 			</div>
 			<div
