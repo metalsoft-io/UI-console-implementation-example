@@ -10,6 +10,7 @@ export default function GuacamoleConsole({ serverData, userData }) {
 	const nonvisibleButtonRef = useRef(null);
 	const [errorGuacamoleTunnel, setErrorGuacamoleTunnel] = useState(null);
 	const [errorGuacamoleClient, setErrorGuacamoleClient] = useState(null);
+	const [autoRetry, setAutoRetry] = useState(false);
 
 	const guacdPublicErrors = useMemo(() => guacdPublicStatusErrors(), []);
 	const guacdInternalErrors = useMemo(() => guacdInternalStatuses(), []);
@@ -217,6 +218,7 @@ export default function GuacamoleConsole({ serverData, userData }) {
 				{
 					bClientConnected = true;
 					console.log("Client connected");
+					setAutoRetry(true);
 				}
 				else
 				{
@@ -305,6 +307,13 @@ export default function GuacamoleConsole({ serverData, userData }) {
 			window.removeEventListener("beforeunload", cleanup);
 		};
 	}, [cleanup]);
+
+	useEffect(() => {
+		if (autoRetry && (errorGuacamoleTunnel || errorGuacamoleClient || presetConfigConsolError)) {
+			setGuacClientObj(null);
+			setAutoRetry(false);
+		}
+	}, [errorGuacamoleTunnel, errorGuacamoleClient, presetConfigConsolError, autoRetry]);
 
 	return (
 		<div ref={wrapperRef}
